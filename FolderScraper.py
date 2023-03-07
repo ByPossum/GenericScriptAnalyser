@@ -3,9 +3,10 @@ from os.path import isfile, join, isdir
 from filehandler import filehandler
 
 class folderscraper:
-    def __init__(self, parentfolder):
+    def __init__(self, parentfolder : str, folderextention : str):
         self.fileContents = []
         self.parentfolder = parentfolder
+        self.folderextention = "." + folderextention
 
     def getFiles(self):
         return self.fileContents
@@ -13,9 +14,9 @@ class folderscraper:
     def addFile(self, fileName):
         self.fileContents.append(filehandler(fileName).getFileContents().strip())
 
-    def getAllCSFiles(self, folderName : str):
+    def getAllFilesWithOwnedExtention(self, folderName : str):
         allFiles = [f for f in listdir(folderName) if isfile(join(folderName, f))]
-        csFiles = [f for f in allFiles if f[-3:] == ".cs"]
+        csFiles = [f for f in allFiles if f[-3:] == self.folderextention]
         parentName = self.parentfolder.replace("\\", "/")
         for filename in csFiles:
             fn = folderName.replace(parentName, "")
@@ -27,7 +28,7 @@ class folderscraper:
 
     def addFilesFromNestedFolders(self):
         for folder in self.getAllFolders():
-            self.getAllCSFiles(folder.__str__().replace("\\", '/'))
+            self.getAllFilesWithOwnedExtention(folder.__str__().replace("\\", '/'))
 
     def collectAllFiles(self):
         #self.getAllCSFiles(self.parentfolder)
