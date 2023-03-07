@@ -16,8 +16,9 @@ class folderscraper:
     def getAllCSFiles(self, folderName : str):
         allFiles = [f for f in listdir(folderName) if isfile(join(folderName, f))]
         csFiles = [f for f in allFiles if f[-3:] == ".cs"]
+        parentName = self.parentfolder.replace("\\", "/")
         for filename in csFiles:
-            fn = folderName.replace("C:/Users/ImHiP/Documents/GitHub/ArmOfSatan/Assets/Scripts/", "")
+            fn = folderName.replace(parentName, "")
             print(f"{fn}/{filename}")
             self.addFile(f"{folderName}/{filename}")
 
