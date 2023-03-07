@@ -5,11 +5,11 @@ from matplotlib import pyplot
 
 def main():
     running = True
-    fs = folderscraper(input("Type folder Path "), input("Type folder extention (without the .) "))
+    scriptCollection = folderscraper(input("Type folder Path "), input("Type folder extention (without the .) "))
     while(running):
-        fs.collectAllFiles()
-        sa = scriptanalytics(fs.fileContents)
-        df = pandas.DataFrame(sa.linesOfCode)
+        scriptCollection.collectAllFiles()
+        scriptAnalyzer = scriptanalytics(scriptCollection.fileContents)
+        df = pandas.DataFrame(scriptAnalyzer.linesOfCode)
         df.boxplot(column="Scripts")
         
         pyplot.show()
