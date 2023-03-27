@@ -11,7 +11,8 @@ class window:
         self.window.geometry(f'{x}x{y}+0+0')
         self.create_inputs()
         self.runButton = tk.Button(self.window, text="Analyse", command=self.analyse)
-        self.runButton.pack()
+        #self.runButton.pack()
+        self.runButton.grid(row=1, column=2)
         self.running = True
         self.window.protocol("WM_DELETE_WINDOW", self.close)
 
@@ -24,8 +25,8 @@ class window:
 
     def create_inputs(self):
         self.createEntriesandLabels()
-        #self.placeEntriesandLabels()
-        self.packEntriesandLabels()
+        self.placeEntriesandLabels()
+        #self.packEntriesandLabels()
 
 
     def createEntriesandLabels(self):

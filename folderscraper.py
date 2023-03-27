@@ -31,6 +31,5 @@ class folderscraper:
             self.getAllFilesWithOwnedExtention(folder.__str__().replace("\\", '/'))
 
     def collectAllFiles(self):
-        #self.getAllCSFiles(self.parentfolder)
         self.addFilesFromNestedFolders()
         
