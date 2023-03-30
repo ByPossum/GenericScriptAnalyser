@@ -23,6 +23,7 @@ class window:
         self.window.geometry(f'{x}x{y}+0+0')
         self.create_inputs()
         self.createRunButton()
+        self.createAnalasysDropDown()
 
     def create_inputs(self):
         self.createEntriesandLabels()
@@ -45,7 +46,10 @@ class window:
         self.runButton.grid(row=1, column=2)
 
     def createAnalasysDropDown(self):
-        dropOptions = ['Length','Dependancy']
+        dropOptions = ["Length","Dependancy"]
+        self.dropValue = tk.StringVar(self.window)
+        self.dropBar = tk.OptionMenu(self.window, self.dropValue, *dropOptions)
+        self.dropBar.grid(row=0,column=3)
         
 
     def analyse(self):
