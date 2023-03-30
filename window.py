@@ -24,6 +24,7 @@ class window:
         self.create_inputs()
         self.createRunButton()
         self.createAnalasysDropDown()
+        self.createDebugLabel()
 
     def create_inputs(self):
         self.createEntriesandLabels()
@@ -34,6 +35,15 @@ class window:
         self.folderPath = tk.Entry(self.window)
         self.ftLabel = tk.Label(self.window, text="File Type")
         self.fileType =  tk.Entry(self.window)
+
+    def createDebugLabel(self):
+        self.debugLabel = tk.Label(self.window, text="Debug Text:")
+        self.debugLabel.grid(row=0, column=4)
+        self.debugText = tk.Label(self.window, text="")
+        self.debugText.grid(row=1, column=4)
+
+    def setDebugText(self, dbgText):
+        self.debugText.config(text = dbgText)
 
     def placeEntriesandLabels(self):
         self.fpLabel.grid(row=0,column=0)
@@ -48,11 +58,21 @@ class window:
     def createAnalasysDropDown(self):
         dropOptions = ["Length","Dependancy"]
         self.dropValue = tk.StringVar(self.window)
+        self.dropValue.set(dropOptions[0])
         self.dropBar = tk.OptionMenu(self.window, self.dropValue, *dropOptions)
         self.dropBar.grid(row=0,column=3)
         
 
     def analyse(self):
+        self.setDebugText("")
+        dropOption = self.dropValue.get()
+        if dropOption == "Length":
+            self.lengthAnalysis()
+        elif dropOption == "Dependancy":
+            self.setDebugText("Dependancy Not Implemented")
+
+
+    def lengthAnalysis(self):
         scriptCollection = folderscraper(self.folderPath.get(), self.fileType.get())
         scriptCollection.collectAllFiles()
         scriptAnalyzer = scriptanalytics(scriptCollection.fileContents)
