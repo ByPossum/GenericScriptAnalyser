@@ -39,7 +39,7 @@ class window:
     def createDebugLabel(self):
         self.debugLabel = tk.Label(self.window, text="Debug Text:")
         self.debugLabel.grid(row=0, column=4)
-        self.debugText = tk.Label(self.window, text="")
+        self.debugText = tk.Label(self.window, text="", fg="#C00")
         self.debugText.grid(row=1, column=4)
 
     def setDebugText(self, dbgText):
@@ -64,7 +64,7 @@ class window:
         
 
     def analyse(self):
-        self.setDebugText("")
+        self.setDebugText("Outliers not calculated")
         dropOption = self.dropValue.get()
         if dropOption == "Length":
             self.lengthAnalysis()
@@ -77,5 +77,5 @@ class window:
         scriptCollection.collectAllFiles()
         scriptAnalyzer = scriptanalytics(scriptCollection.fileContents)
         df = pandas.DataFrame(scriptAnalyzer.linesOfCode)
-        df.boxplot(column="Scripts")
+        df.boxplot(column="Scripts", showfliers=False)
         pyplot.show()

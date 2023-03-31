@@ -1,6 +1,5 @@
 from application import application
 
-
 def main():
     app = application()
     while(app.running):
