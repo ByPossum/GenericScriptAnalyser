@@ -21,7 +21,7 @@ class window:
     def createWindow(self, x, y, title):
         self.window = tk.Tk()
         self.window.title(title)
-        self.window.tk.call('wm', 'iconphoto', self.window._w, tk.PhotoImage(f'{os.getcwd()}/Assets/Icon.ico'))
+        self.window.tk.call('wm', 'iconbitmap', self.window._w, tk.PhotoImage(f'{os.getcwd()}\Assets\Icon.ico'))
         self.window.geometry(f'{x}x{y}+0+0')
         self.create_inputs()
         self.createRunButton()
