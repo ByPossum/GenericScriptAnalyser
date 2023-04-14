@@ -24,3 +24,4 @@ class scriptanalytics:
         elif '{' in line or '}' and len(line.strip()) == 1:
             return False
         return True
+    

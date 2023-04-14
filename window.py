@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 from folderscraper import folderscraper
 from scriptanalytics import scriptanalytics
+from classcollecter import classcollector
 import pandas
 from matplotlib import pyplot
 
@@ -63,7 +64,6 @@ class window:
         self.dropValue.set(dropOptions[0])
         self.dropBar = tk.OptionMenu(self.window, self.dropValue, *dropOptions)
         self.dropBar.grid(row=0,column=3)
-        
 
     def analyse(self):
         self.setDebugText("Outliers not calculated")
@@ -71,8 +71,7 @@ class window:
         if dropOption == "Length":
             self.lengthAnalysis()
         elif dropOption == "Dependancy":
-            self.setDebugText("Dependancy Not Implemented")
-
+            self.dependancyAnalysis()
 
     def lengthAnalysis(self):
         scriptCollection = folderscraper(self.folderPath.get(), self.fileType.get())
@@ -81,3 +80,9 @@ class window:
         df = pandas.DataFrame(scriptAnalyzer.linesOfCode)
         df.boxplot(column="Scripts", showfliers=False)
         pyplot.show()
+
+    def dependancyAnalysis(self):
+        scriptCollection = folderscraper(self.folderPath.get(), self.fileType.get())
+        scriptCollection.collectAllFiles()
+        collector = classcollector(scriptCollection.fileContents)
+        self.setDebugText("Dependancy Not Implemented")
