@@ -20,7 +20,7 @@ class folderscraper:
         parentName = self.parentfolder.replace("\\", "/")
         for filename in csFiles:
             fn = folderName.replace(parentName, "")
-            print(f"{fn}/{filename}")
+            #print(f"{fn}/{filename}")
             self.addFile(f"{folderName}/{filename}")
 
     def getAllFolders(self):
